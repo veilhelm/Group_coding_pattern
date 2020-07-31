@@ -9,10 +9,18 @@ const EatingSlowStrategy = function () {
     }
 }
 
+const EatingNormalStrategy = function () {
+    this.eat = function(typeOfFood){
+        return `this cat eats at normal speed and is eating ${typeOfFood}`
+    }
+}
+
 const eatingFastStrategy = new EatingFastStrategy()
 const eatingSlowStrategy = new EatingSlowStrategy()
+const eatingNormalStrategy = new EatingNormalStrategy()
 
 module.exports = {
     eatingFastStrategy,
-    eatingSlowStrategy
+    eatingSlowStrategy,
+    eatingNormalStrategy
 }

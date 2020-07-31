@@ -1,16 +1,19 @@
 const {Cat} = require("./cat_class")
-const {eatingfastStrategy, eatingSlowStrategy} = require("./behaviour_strategy")
+const {eatingFastStrategy, eatingSlowStrategy} = require("./behaviour_strategy")
 
-const extractedInfo = []
-const thereIsFood = true
-const cats = []
+const state = {}
 
-extractedInfo.push({type :"wildCat", typeOfFood: "rats"})
-extractedInfo.push({type :"houseCat", typeOfFood: "cans"})
-extractedInfo.push({type :"streetCat", typeOfFood: "grumbs"})
+//----------variables given by the client--------------------------------------------------------------------------------------------
+state.isThereFood = false
+state.weather = "sunny"
+state.cats = [{type :"wildCat", typeOfFood: "rats"},{type :"houseCat", typeOfFood: "cans"}, {type :"streetCat", typeOfFood: "grumbs"}]
+state.catNumber = 0
+//------------------------------------------------------------------------------------------------------------------------------------
 
-const wildCat = new Cat(extractedInfo[0].type, extractedInfo[0].typeOfFood)
-wildCat.setEatStrategy(thereIsFood ? eatingfastStrategy : eatingSlowStrategy)
+const catParams = state.cats[state.catNumber]
+const catToRender = new Cat(catParams.type, catParams.typeOfFood)
 
+if(state.isThereFood && state.weather === "sunny") catToRender.setEatStrategy(eatingSlowStrategy)
+if(!state.isThereFood && state.weather === "cloudy") catToRender.setEatStrategy(eatingFastStrategy)
 
-cats.forEach(cat => cat.eat())
+console.log(catToRender.eat())
